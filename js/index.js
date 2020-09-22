@@ -4,6 +4,7 @@ const monsterContainer = document.querySelector('#monster-container')
 let pageNumber = 1
 const fetchUrl = number => {
     let baseUrl = 'http://localhost:3000/monsters/?_limit=50&_page=${number}'
+    fetch(baseUrl)
     .then(resp => resp.json())
     .then(monsters => renderMonsters(monsters))
 }
@@ -48,7 +49,8 @@ const formHandler = () => {
     <input type='text' name='bio' id='bio-input' placeholder='bio'>
     <input type='submit' value='Submit'>
 `
-monsterDiv.appendChild('form')
+    const monsterDiv = document.querySelector('div')
+    monsterDiv.appendChild('form')
 
 }
 
@@ -74,7 +76,7 @@ const addMonster = info => {
     let baseUrl =  `http://localhost:3000/monsters/?_limit=20&_page=${pageNumber}`
 
     options = {
-        method: 'POST'.value,
+        method: 'POST',
         headers: {
             'content-type': 'application/json',
             'accept': 'application/json'
